@@ -13,6 +13,9 @@ public class GameFinishedResponse {
     private String message;
     private String result;
     private List<Point> winPoints;
+    private Integer lastX;
+    private Integer lastY;
+    private String lastColor;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private final LocalDateTime time;

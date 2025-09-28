@@ -46,7 +46,13 @@ function sendToServer() {
         body: JSON.stringify(dto)
     })
         .then(async res => {
-            const data = await res.json();
+            let data;
+            try {
+                data = await res.json();
+            } catch (e) {
+                console.error("Ошибка парсинга ответа", e);
+                throw e;
+            }
 
             if (res.ok) {
                 if (data.x !== undefined && data.y !== undefined) {
@@ -55,7 +61,13 @@ function sendToServer() {
                 }
             } else {
                 const statusEl = document.getElementById("status");
+
                 if (res.status === 400 && data.result !== undefined) {
+                    if (data.lastX != null && data.lastY != null && data.lastColor != null) {
+                        board[data.lastY][data.lastX] = data.lastColor;
+                        renderBoard();
+                    }
+
                     statusEl.textContent = `Игра закончена! ${data.result}`;
                     gameOver = true;
 
@@ -71,6 +83,7 @@ function sendToServer() {
                 } else {
                     statusEl.textContent = `Ошибка: ${data.message || "Неизвестная ошибка"}`;
                 }
+
                 statusEl.classList.add("show");
             }
         })

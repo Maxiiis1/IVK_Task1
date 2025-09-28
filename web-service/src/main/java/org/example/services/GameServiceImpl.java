@@ -40,6 +40,7 @@ public class GameServiceImpl implements GameService {
                 if (c == ' ' || c == '_' ) {
                     continue;
                 }
+
                 Color col = colorMapper.mapCharToColor(c);
                 inputBoard.place(x, y, col);
             }
@@ -66,13 +67,27 @@ public class GameServiceImpl implements GameService {
         for (Color color : Color.values()) {
             List<Point> win = new SquareDetectorImpl().findWinningSquare(engine.getBoard(), color);
             if (win != null) {
-                throw new GameAlreadyFinishedException(winnerMessage(color), win);
+                throw new GameAlreadyFinishedException(
+                        winnerMessage(color),
+                        win,
+                        null, null, null);
             }
         }
 
         Point move = engine.makeComputerMove();
         if (move == null) {
             throw new NoMoveAvailableException("No available move");
+        }
+
+        for (Color color : Color.values()) {
+            List<Point> win = new SquareDetectorImpl().findWinningSquare(engine.getBoard(), color);
+            if (win != null) {
+                throw new GameAlreadyFinishedException(
+                        winnerMessage(color),
+                        win,
+                        move.x(), move.y(), colorMapper.charForColor(color)
+                );
+            }
         }
 
         String colorString = colorMapper.charForColor(nextColor);

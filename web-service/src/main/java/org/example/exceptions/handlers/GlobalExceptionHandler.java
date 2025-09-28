@@ -17,7 +17,8 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(GameAlreadyFinishedException.class)
     public GameFinishedResponse handleException(GameAlreadyFinishedException ex){
-        return new GameFinishedResponse(ex.getMessage(), ex.getResult(), ex.getWinPoints(), LocalDateTime.now());
+        return new GameFinishedResponse(ex.getMessage(), ex.getResult(), ex.getWinPoints(),
+                ex.getLastX(), ex.getLastY(), ex.getLastColor(), LocalDateTime.now());
     }
 
     @ResponseStatus(HttpStatus.CONFLICT)
