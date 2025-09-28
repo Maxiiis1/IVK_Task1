@@ -1,18 +1,21 @@
 Инструкция по запуску приложения:
 1. Склонируйте весь проект
 2. Запуск консольного приложения:
+
    a)Перейдите в директорию IVK_Task1.
    
    b)mvn clean install
 
    c)mvn -pl game-engine exec:java
 4. Запуск web-сервиса:
+
    a)Перейдите в директорию IVK_Task1.
 
    b)mvn clean install
 
    с)mvn -pl web-service spring-boot:run
 6. Запуск web-приложения:
+
    a)Запустите web-сервис, как в пункте 3. Поднимется backend
 
    b)В новом терминале перейдите в директорию web-app (cd web-app)
