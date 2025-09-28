@@ -14,4 +14,5 @@
    c)npm install
    d)npm run dev
    Поднимется frontend. Далее перейдите по адресу, который появился, чтобы воспользоваться веб приложением
+   
    <img width="351" height="178" alt="image" src="https://github.com/user-attachments/assets/bfe53c77-fdf6-4aab-9d71-d6affa4495b8" />
